@@ -42,24 +42,12 @@ loader = BSHTMLLoader(file_path="python.langchain.com/en/latest")
 raw_docs = loader.load()
 text_splitter = RecursiveCharacterTextSplitter(
     chunk_size=1000,
-    overlap_size=100,
+    overlap_size=200,
 )
 docs = text_splitter.split_documents(raw_docs)
 embeddings = OpenAIEmbeddings(openai_api_key=openai_api_key)
 
 # Add documents to the retriever
-ids = retriever.add_documents(docs, embeddings)
+ids = retriever.add_documents(docs)
 
-
-# docs = [Document(page_content="AutoGPT")]
-# ids = retriever.add_documents(docs)
-
-# Get relevant documents
-# relevant_docs = retriever.get_relevant_documents(<query>)
-
-# docs = vectorstore.similarity_search_by_vector()
-
-# Delete all classes and objects from the schema
-client.schema.delete_all()
-
-print("Done!")
+print(ids)
