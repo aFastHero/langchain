@@ -49,17 +49,19 @@ text_splitter = RecursiveCharacterTextSplitter(
 )
 docs = text_splitter.split_documents(raw_docs)
 
-added = retriever.add_documents(docs)
+# added = retriever.add_documents(docs)
 
-vectorstore = Weaviate(client, "LangChain", "text")
+# vectorstore = Weaviate(client, "LangChain", "text")
 
 # Instantiate the embeddings
-embeddings = OpenAIEmbeddings(openai_api_key=openai_api_key)
+embedding = OpenAIEmbeddings(openai_api_key=openai_api_key)
 
-embedding = vectorstore.from_documents(docs, embeddings)
+embeddings = embedding.embed_documents(docs)
+
+# embeddings = vectorstore.from_documents(docs, embedding)
 
 # Add documents to the retriever
 # added = vectorstore.from_documents(docs, embeddings)
 
 
-print("Done!")
+print(embeddings)
