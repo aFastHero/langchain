@@ -1,6 +1,7 @@
 import os
 import dotenv
 import weaviate
+import openai
 # from langchain.vectorstores.weaviate import Weaviate
 # from langchain.vectorstores import Weaviate
 
@@ -21,6 +22,7 @@ client = weaviate.Client(
 )
 
 
+from langchain.vectorstores import Weaviate
 from langchain.embeddings import OpenAIEmbeddings
 from langchain.document_loaders import BSHTMLLoader
 from langchain.retrievers.weaviate_hybrid_search import WeaviateHybridSearchRetriever
@@ -34,32 +36,17 @@ retriever = WeaviateHybridSearchRetriever(
     text_key = "text",
 )
 
+loader = Weaviate(client, "LangChain", "text")
+
 # Define a query
-# query = "<Enter query here>"
-
-# Add documents to the retriever
-loader = BSHTMLLoader(file_path="python.langchain.com/en/latest")
-raw_docs = loader.load()
-text_splitter = RecursiveCharacterTextSplitter(
-    chunk_size=1000,
-    overlap_size=100,
-)
-docs = text_splitter.split_documents(raw_docs)
-embeddings = OpenAIEmbeddings(openai_api_key=openai_api_key)
-
-# Add documents to the retriever
-ids = retriever.add_documents(docs, embeddings)
-
-
-# docs = [Document(page_content="AutoGPT")]
-# ids = retriever.add_documents(docs)
+query = "What is LangChain?"
 
 # Get relevant documents
-# relevant_docs = retriever.get_relevant_documents(<query>)
+relevant_docs = retriever.get_relevant_documents(query)
 
 # docs = vectorstore.similarity_search_by_vector()
 
 # Delete all classes and objects from the schema
-client.schema.delete_all()
+# client.schema.delete_all()
 
-print("Done!")
+print(relevant_docs)
