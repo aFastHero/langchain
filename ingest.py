@@ -40,8 +40,8 @@ retriever = WeaviateHybridSearchRetriever(
 # query = "<Enter query here>"
 
 # Add documents to the retriever
-loader = ReadTheDocsLoader("python.langchain.com/en/latest", features="html.parser")
-# loader = BSHTMLLoader("python.langchain.com/en/latest")
+# loader = ReadTheDocsLoader("python.langchain.com/en/latest", features="html.parser")
+loader = BSHTMLLoader("python.langchain.com/en/latest/")
 raw_docs = loader.load()
 text_splitter = RecursiveCharacterTextSplitter(
     chunk_size=1000,
@@ -51,7 +51,12 @@ docs = text_splitter.split_documents(raw_docs)
 
 added = retriever.add_documents(docs)
 
-# vectorstore = Weaviate(client, "LangChain", "text")
+vectorstore = Weaviate(client, "LangChain", "text")
+
+# Instantiate the embeddings
+embeddings = OpenAIEmbeddings(openai_api_key=openai_api_key)
+
+embedding = vectorstore.from_documents(docs, embeddings)
 
 # Add documents to the retriever
 # added = vectorstore.from_documents(docs, embeddings)
