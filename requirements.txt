@@ -15,17 +15,19 @@ frozenlist==1.3.3
 greenlet==2.0.2
 idna==3.4
 iniconfig==2.0.0
--e git+https://github.com/aFastHero/langchain.git@eccc62c17a7d9c1813e03a7f557bd50496741d31#egg=langchain
+-e git+https://github.com/aFastHero/langchain.git@217d5fb9ec8197c1eee298475622ac1fc65da90b#egg=langchain
 marshmallow==3.19.0
 marshmallow-enum==1.5.1
 multidict==6.0.4
 mypy-extensions==1.0.0
 numexpr==2.8.4
 numpy==1.24.3
-openai==0.27.4
+openai==0.27.5
 openapi-schema-pydantic==1.2.4
 packaging==23.1
+pexpect==4.8.0
 pluggy==1.0.0
+ptyprocess==0.7.0
 pycparser==2.21
 pydantic==1.10.7
 pytest==7.3.1

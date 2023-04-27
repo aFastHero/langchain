@@ -22,7 +22,7 @@ client = weaviate.Client(
 
 
 from langchain.embeddings import OpenAIEmbeddings
-from langchain.document_loaders import BSHTMLLoader
+# from langchain.document_loaders import BSHTMLLoader
 from langchain.document_loaders import ReadTheDocsLoader
 from langchain.retrievers.weaviate_hybrid_search import WeaviateHybridSearchRetriever
 from langchain.vectorstores import Weaviate
@@ -40,8 +40,8 @@ retriever = WeaviateHybridSearchRetriever(
 # query = "<Enter query here>"
 
 # Add documents to the retriever
-# loader = ReadTheDocsLoader("python.langchain.com/en/latest", features="html.parser")
-loader = BSHTMLLoader("python.langchain.com/en/latest/")
+loader = ReadTheDocsLoader("python.langchain.com/en/latest", features="html.parser")
+# loader = BSHTMLLoader("python.langchain.com/en/latest/")
 raw_docs = loader.load()
 text_splitter = RecursiveCharacterTextSplitter(
     chunk_size=1000,
