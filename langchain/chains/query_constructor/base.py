@@ -5,6 +5,7 @@ import json
 from typing import Any, Callable, List, Optional, Sequence
 
 from langchain import BasePromptTemplate, FewShotPromptTemplate, LLMChain
+from langchain.base_language import BaseLanguageModel
 from langchain.chains.query_constructor.ir import (
     Comparator,
     Operator,
@@ -20,7 +21,7 @@ from langchain.chains.query_constructor.prompt import (
 )
 from langchain.chains.query_constructor.schema import AttributeInfo
 from langchain.output_parsers.structured import parse_json_markdown
-from langchain.schema import BaseLanguageModel, BaseOutputParser, OutputParserException
+from langchain.schema import BaseOutputParser, OutputParserException
 
 
 class StructuredQueryOutputParser(BaseOutputParser[StructuredQuery]):
@@ -55,7 +56,7 @@ class StructuredQueryOutputParser(BaseOutputParser[StructuredQuery]):
         return cls(ast_parse=ast_parser.parse)
 
 
-def _format_attribute_info(info: List[AttributeInfo]) -> str:
+def _format_attribute_info(info: Sequence[AttributeInfo]) -> str:
     info_dicts = {}
     for i in info:
         i_dict = dict(i)
@@ -65,7 +66,7 @@ def _format_attribute_info(info: List[AttributeInfo]) -> str:
 
 def _get_prompt(
     document_contents: str,
-    attribute_info: List[AttributeInfo],
+    attribute_info: Sequence[AttributeInfo],
     examples: Optional[List] = None,
     allowed_comparators: Optional[Sequence[Comparator]] = None,
     allowed_operators: Optional[Sequence[Operator]] = None,
