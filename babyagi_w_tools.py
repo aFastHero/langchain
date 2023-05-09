@@ -290,7 +290,7 @@ class BabyAGI(Chain, BaseModel):
             **kwargs,
         )
 
-OBJECTIVE = "Write a weather report for SF today"
+OBJECTIVE = input("Enter your objective: ")
 
 llm = OpenAI(temperature=0)
 
