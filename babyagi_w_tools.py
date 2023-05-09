@@ -297,7 +297,7 @@ llm = OpenAI(temperature=0)
 # Logging of LLMChains
 verbose = False
 # If None, will keep on going forever
-max_iterations: Optional[int] = 1
+max_iterations: Optional[int] = input("Enter max number of iteration (leave blank for infinite): ")
 baby_agi = BabyAGI.from_llm(
     llm=llm, vectorstore=vectorstore, verbose=verbose, max_iterations=max_iterations
 )
